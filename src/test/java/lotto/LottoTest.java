@@ -1,10 +1,12 @@
 package lotto;
 
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
+import static org.assertj.core.api.Assertions.*;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class LottoTest {
@@ -24,4 +26,32 @@ class LottoTest {
     }
 
     // 아래에 추가 테스트 작성 가능
+    @DisplayName("당첨번호와 로또번호 사이에 같은 수의 개수를 구하는 기능")
+    @Test
+    void countSameNumber() {
+        Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
+
+        assertThat(lotto.compare(List.of(1, 2, 3, 4, 5, 6))).isEqualTo(6);
+
+        assertThat(lotto.compare(List.of(1, 2, 3, 4, 5, 10))).isEqualTo(5);
+
+        assertThat(lotto.compare(List.of(1, 2, 3, 4, 10, 11))).isEqualTo(4);
+
+        assertThat(lotto.compare(List.of(1, 2, 3, 10, 11, 12))).isEqualTo(3);
+
+        assertThat(lotto.compare(List.of(1, 2, 10, 11, 12, 13))).isEqualTo(2);
+
+        assertThat(lotto.compare(List.of(1, 10, 11, 12, 13, 14))).isEqualTo(1);
+
+        assertThat(lotto.compare(List.of(10, 11, 12, 13, 14, 15))).isEqualTo(0);
+    }
+
+    @DisplayName("보너스 번호가 로또번호에 있는지 판단하는 기능")
+    @Test
+    void hasBonusNumber() {
+        Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
+
+        assertThat(lotto.hasNumber(1)).isTrue();
+        assertThat(lotto.hasNumber(7)).isFalse();
+    }
 }
