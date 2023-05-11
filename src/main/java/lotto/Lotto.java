@@ -11,12 +11,27 @@ public class Lotto {
     }
 
     private void validate(List<Integer> numbers) {
+        isValidSize(numbers);
+        isDuplicate(numbers);
+    }
+
+    private void isDuplicate(List<Integer> numbers) {
+        if (numbers.size() != numbers.stream().distinct().count()) {
+            throw new IllegalArgumentException();
+        }
+    }
+
+    private void isValidSize(List<Integer> numbers) {
         if (numbers.size() != 6) {
             throw new IllegalArgumentException();
         }
     }
 
     // TODO: 추가 기능 구현
+    public static Lotto createLotto(List<Integer> numbers) {
+        return new Lotto(numbers);
+    }
+
     public int compare(List<Integer> winningNumber) {
         int result = 0;
         for (Integer number : winningNumber) {

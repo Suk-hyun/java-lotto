@@ -54,4 +54,21 @@ class LottoTest {
         assertThat(lotto.hasNumber(1)).isTrue();
         assertThat(lotto.hasNumber(7)).isFalse();
     }
+
+    @DisplayName("중복된 숫자 값이 있으면 예외를 발생시킨다")
+    @Test
+    void isDuplicate() {
+        assertThatThrownBy(() -> new Lotto(List.of(1, 2, 3, 4, 5, 5)))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @DisplayName("로또 번호가 6자리가 아니면 예외를 발생시킨다")
+    @Test
+    void isValidSize() {
+        assertThatThrownBy(() -> new Lotto(List.of(1, 2, 3, 4, 5, 6, 7)))
+                .isInstanceOf(IllegalArgumentException.class);
+
+        assertThatThrownBy(() -> new Lotto(List.of(1, 2, 3, 4, 5)))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
 }
