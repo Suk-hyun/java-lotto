@@ -1,4 +1,6 @@
-package lotto;
+package lotto.utils;
+
+import lotto.view.InputView;
 
 import java.util.ArrayList;
 import java.util.List;

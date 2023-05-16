@@ -1,4 +1,6 @@
-package lotto;
+package lotto.domain;
+
+import lotto.Validations;
 
 import java.util.List;
 
@@ -6,25 +8,8 @@ public class Lotto {
     private final List<Integer> numbers;
 
     public Lotto(List<Integer> numbers) {
-        validate(numbers);
+        Validations.validate(numbers);
         this.numbers = numbers;
-    }
-
-    private void validate(List<Integer> numbers) {
-        isValidSize(numbers);
-        isDuplicate(numbers);
-    }
-
-    private void isDuplicate(List<Integer> numbers) {
-        if (numbers.size() != numbers.stream().distinct().count()) {
-            throw new IllegalArgumentException();
-        }
-    }
-
-    private void isValidSize(List<Integer> numbers) {
-        if (numbers.size() != 6) {
-            throw new IllegalArgumentException();
-        }
     }
 
     // TODO: 추가 기능 구현
@@ -32,7 +17,7 @@ public class Lotto {
         return new Lotto(numbers);
     }
 
-    public int compare(List<Integer> winningNumber) {
+    public int countSameNumber(List<Integer> winningNumber) {
         int result = 0;
         for (Integer number : winningNumber) {
             if (numbers.contains(number)) {
@@ -44,5 +29,9 @@ public class Lotto {
 
     public Boolean hasNumber(int i) {
         return numbers.contains(i);
+    }
+
+    public List<Integer> getNumbers() {
+        return numbers;
     }
 }

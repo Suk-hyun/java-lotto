@@ -1,4 +1,6 @@
-package lotto;
+package lotto.domain;
+
+import lotto.Validations;
 
 import java.util.List;
 
@@ -9,5 +11,9 @@ public class WinningNumbers {
     public WinningNumbers(List<Integer> numbers) {
         Validations.validate(numbers);
         this.numbers = numbers;
+    }
+
+    public List<Integer> getNumbers() {
+        return numbers;
     }
 }
