@@ -24,10 +24,8 @@ public class Score {
 
     private void init() {
         score = new HashMap<>();
-        score.put(WinningPolicy.FIRST, INITIAL_SCORE);
-        score.put(WinningPolicy.SECOND, INITIAL_SCORE);
-        score.put(WinningPolicy.THIRD, INITIAL_SCORE);
-        score.put(WinningPolicy.FOURTH, INITIAL_SCORE);
-        score.put(WinningPolicy.FIFTH, INITIAL_SCORE);
+        for (WinningPolicy value : WinningPolicy.values()) {
+            score.put(value, INITIAL_SCORE);
+        }
     }
 }
