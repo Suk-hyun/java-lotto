@@ -1,4 +1,4 @@
-package lotto;
+package lotto.utils;
 
 import java.util.List;
 
@@ -12,12 +12,14 @@ public class Validations {
 
     private static void isDuplicate(List<Integer> numbers) {
         if (numbers.size() != numbers.stream().distinct().count()) {
+            System.out.println("[ERROR] 중복되지 않은 숫자를 입력해주세요.");
             throw new IllegalArgumentException();
         }
     }
 
     private static void isValidSize(List<Integer> numbers) {
         if (numbers.size() != 6) {
+            System.out.println("[ERROR] 6개의 숫자를 입력해주세요.");
             throw new IllegalArgumentException();
         }
     }
@@ -30,6 +32,7 @@ public class Validations {
 
     public static void isValidRange(Integer number) {
         if (number < 1 || number > 45) {
+            System.out.println("[ERROR] 1에서 45 사이의 숫자만 입력해주세요.");
             throw new IllegalArgumentException();
         }
     }

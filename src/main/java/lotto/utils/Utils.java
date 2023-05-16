@@ -14,7 +14,7 @@ public class Utils {
         try {
             return Integer.parseInt(input);
         } catch (NumberFormatException e) {
-            System.out.println("숫자만 입력해 주세요");
+            System.out.println("[ERROR] 숫자만 입력해 주세요");
             return stringToInt(InputView.getPurchaseAmount());
         }
     }

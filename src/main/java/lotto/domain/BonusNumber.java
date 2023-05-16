@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.Validations;
+import lotto.utils.Validations;
 
 import java.util.List;
 
@@ -20,6 +20,7 @@ public class BonusNumber {
 
     private void isDuplicateWithWinningNumber(int number, List<Integer> winningNumbers) {
         if (winningNumbers.contains(number)) {
+            System.out.println("ERROR] 당첨번호와 중복되지 않는 숫자를 입력해주세요.");
             throw new IllegalArgumentException();
         }
     }
