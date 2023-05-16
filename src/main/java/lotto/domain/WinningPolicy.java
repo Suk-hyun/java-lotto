@@ -1,20 +1,26 @@
 package lotto.domain;
 
 public enum WinningPolicy {
-    FIRST(2_000_000_000),
-    SECOND(30_000_000),
-    THIRD(1_500_000),
-    FOURTH(50_000),
-    FIFTH(5_000);
+    FIRST(2_000_000_000, 6),
+    SECOND(30_000_000, 5),
+    THIRD(1_500_000, 5),
+    FOURTH(50_000, 4),
+    FIFTH(5_000, 3);
 
     private final int prize;
+    private final int sameNumber;
 
-    WinningPolicy(int prize) {
+    WinningPolicy(int prize, int sameNumber) {
         this.prize = prize;
+        this.sameNumber = sameNumber;
     }
 
     public int getPrize() {
         return prize;
+    }
+
+    public int getSameNumber() {
+        return sameNumber;
     }
 
     public static WinningPolicy getResult(int sameNumber , int bonusNumber, Lotto lotto) {
