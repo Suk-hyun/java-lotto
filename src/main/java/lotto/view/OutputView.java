@@ -65,7 +65,7 @@ public class OutputView {
         }
     }
 
-    public static void printEarningRate(int earningRate) {
+    public static void printEarningRate(double earningRate) {
         DecimalFormat df = new DecimalFormat("#,###,###.0%");
         System.out.println("총 수익률은 " + df.format(earningRate) + "입니다.");
     }

@@ -67,9 +67,9 @@ public class Controller {
         purchaseAmount = new PurchaseAmount(inputToInt);
     }
 
-    private int getEarningRate() {
-        int totalPrize = service.getTotalPrize(score);
-        int amount = purchaseAmount.getAmount();
+    private double getEarningRate() {
+        double totalPrize = service.getTotalPrize(score);
+        double amount = purchaseAmount.getAmount();
         return totalPrize / amount;
     }
 }
