@@ -1,37 +1,62 @@
 package lotto.cotroller;
 
-import lotto.domain.BonusNumber;
+import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.LottoService;
-import lotto.Utils;
-import lotto.domain.PurchaseAmount;
-import lotto.domain.WinningNumbers;
+import lotto.utils.Utils;
+import lotto.view.OutputView;
 
 import java.util.List;
 
 public class Controller {
 
     LottoService service = new LottoService();
-    PurchaseAmount amount;
+    PurchaseAmount purchaseAmount;
     WinningNumbers winningNumbers;
     BonusNumber bonusNumber;
 
+    Score score = new Score();
+
     public void createLottoByPurchaseAmount() {
+        OutputView.printPurchaseRequest();
         setPurchaseAmount();
-        int numberOfLottoToCreate = amount.getNumberOfLottoToCreate();
+        int numberOfLottoToCreate = purchaseAmount.getNumberOfLottoToCreate();
         service.createAllLottoByInput(numberOfLottoToCreate);
     }
 
+    public void printNumberOfLotto() {
+        OutputView.printNumberOfLotto(purchaseAmount.getNumberOfLottoToCreate());
+    }
+
+    public void printAllLotto() {
+        OutputView.printAllLotto(service.getAllLotto());
+    }
+
     public void setWinningNumbers() {
+        OutputView.printWinningNumbersRequest();
         String input = InputView.getWinningNumbers();
         List<Integer> toIntList = Utils.inputToIntList(input);
         winningNumbers = new WinningNumbers(toIntList);
     }
 
     public void setBonusNumber() {
+        OutputView.printBonusNumberRequest();
         String input = InputView.getBonusNumber();
         int toInt = Utils.stringToInt(input);
-        bonusNumber = new BonusNumber(toInt);
+        bonusNumber = new BonusNumber(toInt, winningNumbers.getNumbers());
+    }
+
+    public void calculateScore() {
+        service.calculateScore(winningNumbers.getNumbers(), bonusNumber.getNumber(), score);
+    }
+
+    public void printOutput() {
+        OutputView.printScoreMessage();
+        OutputView.printScore(score);
+    }
+
+    public void printEarningRate() {
+        OutputView.printEarningRate(getEarningRate());
     }
 
     private void setPurchaseAmount() {
@@ -39,6 +64,12 @@ public class Controller {
 
         int inputToInt = Utils.stringToInt(input);
 
-        amount = new PurchaseAmount(inputToInt);
+        purchaseAmount = new PurchaseAmount(inputToInt);
+    }
+
+    private int getEarningRate() {
+        int totalPrize = service.getTotalPrize(score);
+        int amount = purchaseAmount.getAmount();
+        return totalPrize / amount;
     }
 }
