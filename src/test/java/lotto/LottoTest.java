@@ -1,6 +1,6 @@
 package lotto;
 
-import org.assertj.core.api.Assertions;
+import lotto.domain.Lotto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -31,19 +31,19 @@ class LottoTest {
     void countSameNumber() {
         Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
 
-        assertThat(lotto.compare(List.of(1, 2, 3, 4, 5, 6))).isEqualTo(6);
+        assertThat(lotto.countSameNumber(List.of(1, 2, 3, 4, 5, 6))).isEqualTo(6);
 
-        assertThat(lotto.compare(List.of(1, 2, 3, 4, 5, 10))).isEqualTo(5);
+        assertThat(lotto.countSameNumber(List.of(1, 2, 3, 4, 5, 10))).isEqualTo(5);
 
-        assertThat(lotto.compare(List.of(1, 2, 3, 4, 10, 11))).isEqualTo(4);
+        assertThat(lotto.countSameNumber(List.of(1, 2, 3, 4, 10, 11))).isEqualTo(4);
 
-        assertThat(lotto.compare(List.of(1, 2, 3, 10, 11, 12))).isEqualTo(3);
+        assertThat(lotto.countSameNumber(List.of(1, 2, 3, 10, 11, 12))).isEqualTo(3);
 
-        assertThat(lotto.compare(List.of(1, 2, 10, 11, 12, 13))).isEqualTo(2);
+        assertThat(lotto.countSameNumber(List.of(1, 2, 10, 11, 12, 13))).isEqualTo(2);
 
-        assertThat(lotto.compare(List.of(1, 10, 11, 12, 13, 14))).isEqualTo(1);
+        assertThat(lotto.countSameNumber(List.of(1, 10, 11, 12, 13, 14))).isEqualTo(1);
 
-        assertThat(lotto.compare(List.of(10, 11, 12, 13, 14, 15))).isEqualTo(0);
+        assertThat(lotto.countSameNumber(List.of(10, 11, 12, 13, 14, 15))).isEqualTo(0);
     }
 
     @DisplayName("보너스 번호가 로또번호에 있는지 판단하는 기능")
