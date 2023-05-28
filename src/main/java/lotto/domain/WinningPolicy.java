@@ -5,7 +5,8 @@ public enum WinningPolicy {
     SECOND(30_000_000, 5),
     THIRD(1_500_000, 5),
     FOURTH(50_000, 4),
-    FIFTH(5_000, 3);
+    FIFTH(5_000, 3),
+    NOTHING(0, 0);
 
     private final int prize;
     private final int sameNumber;
@@ -39,6 +40,6 @@ public enum WinningPolicy {
         if (sameNumber == 3) {
             return FIFTH;
         }
-        return null;
+        return NOTHING;
     }
 }
