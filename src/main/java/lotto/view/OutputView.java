@@ -58,7 +58,7 @@ public class OutputView {
                 System.out.println(sameNumber + "개 일치, 보너스 볼 일치 ("
                                 + df.format(prize) + "원) - " + scoreValue + "개");
             }
-            if (value != WinningPolicy.SECOND) {
+            if (value != WinningPolicy.SECOND && value != WinningPolicy.NOTHING) {
                 System.out.println(sameNumber + "개 일치 ("
                         + df.format(prize) + "원) - " + scoreValue + "개");
             }

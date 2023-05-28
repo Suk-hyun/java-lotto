@@ -13,9 +13,7 @@ public class Score {
     }
 
     public void incScore(WinningPolicy eachRank) {
-        if (eachRank != WinningPolicy.NOTHING) {
-            score.replace(eachRank, score.get(eachRank) + 1);
-        }
+        score.replace(eachRank, score.get(eachRank) + 1);
     }
 
     public Map<WinningPolicy, Integer> getScore() {
