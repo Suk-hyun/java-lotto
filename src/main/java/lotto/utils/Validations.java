@@ -12,15 +12,13 @@ public class Validations {
 
     private static void isDuplicate(List<Integer> numbers) {
         if (numbers.size() != numbers.stream().distinct().count()) {
-            System.out.println("[ERROR] 중복되지 않은 숫자를 입력해주세요.");
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("[ERROR] 중복되지 않은 숫자를 입력해주세요.");
         }
     }
 
     private static void isValidSize(List<Integer> numbers) {
         if (numbers.size() != 6) {
-            System.out.println("[ERROR] 6개의 숫자를 입력해주세요.");
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("[ERROR] 6개의 숫자를 입력해주세요.");
         }
     }
 
@@ -32,8 +30,7 @@ public class Validations {
 
     public static void isValidRange(Integer number) {
         if (number < 1 || number > 45) {
-            System.out.println("[ERROR] 1에서 45 사이의 숫자만 입력해주세요.");
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("[ERROR] 1에서 45 사이의 숫자만 입력해주세요.");
         }
     }
 }
