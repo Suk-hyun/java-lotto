@@ -14,56 +14,70 @@ public class Controller {
     PurchaseAmount purchaseAmount;
     WinningNumbers winningNumbers;
     BonusNumber bonusNumber;
+    Score score;
 
-    Score score = new Score();
+    public void start() {
+        try {
+            createLottoByPurchaseAmount();
+            printNumberOfLotto();
+            printAllLotto();
+            setWinningNumbers();
+            setBonusNumber();
+            calculateScore();
+            printScore();
+            printEarningRate();
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+        }
+    }
 
-    public void createLottoByPurchaseAmount() {
+    private void createLottoByPurchaseAmount() {
         OutputView.printPurchaseRequest();
-        setPurchaseAmount();
+        String input = InputView.getPurchaseAmount();
+
+        setPurchaseAmount(input);
         int numberOfLottoToCreate = purchaseAmount.getNumberOfLottoToCreate();
         service.createAllLottoByInput(numberOfLottoToCreate);
     }
 
-    public void printNumberOfLotto() {
+    private void printNumberOfLotto() {
         OutputView.printNumberOfLotto(purchaseAmount.getNumberOfLottoToCreate());
     }
 
-    public void printAllLotto() {
+    private void printAllLotto() {
         OutputView.printAllLotto(service.getAllLotto());
     }
 
-    public void setWinningNumbers() {
+    private void setWinningNumbers() {
         OutputView.printWinningNumbersRequest();
         String input = InputView.getWinningNumbers();
         List<Integer> toIntList = Utils.inputToIntList(input);
         winningNumbers = new WinningNumbers(toIntList);
     }
 
-    public void setBonusNumber() {
+    private void setBonusNumber() {
         OutputView.printBonusNumberRequest();
         String input = InputView.getBonusNumber();
         int toInt = Utils.stringToInt(input);
         bonusNumber = new BonusNumber(toInt, winningNumbers.getNumbers());
     }
 
-    public void calculateScore() {
+    private void calculateScore() {
+        score = new Score();
         service.calculateScore(winningNumbers.getNumbers(), bonusNumber.getNumber(), score);
     }
 
-    public void printOutput() {
+    private void printScore() {
         OutputView.printScoreMessage();
         OutputView.printScore(score);
     }
 
-    public void printEarningRate() {
+    private void printEarningRate() {
         OutputView.printEarningRate(getEarningRate());
     }
 
-    private void setPurchaseAmount() {
-        String input = InputView.getPurchaseAmount();
-
+    private void setPurchaseAmount(String input) {
         int inputToInt = Utils.stringToInt(input);
-
         purchaseAmount = new PurchaseAmount(inputToInt);
     }
 
